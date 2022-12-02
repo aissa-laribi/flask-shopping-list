@@ -25,3 +25,14 @@ def app():
 
     os.close(db_fd)
     os.unlink(db_path)
+
+
+#Instead of running the server to make requests, 
+@pytest.fixture
+def client(app):
+    return app.test_client()
+
+
+@pytest.fixture
+def runner(app):
+    return app.test_cli_runner()
