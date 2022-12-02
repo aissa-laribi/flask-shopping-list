@@ -1,18 +1,20 @@
 import os
 import tempfile
 import pytest
-from flask-shopping-list import create_app
-from flask-shopping-list.db import get_db, init_db
+
+from shopping_list import create_app
+from shopping_list.db import get_db, init_db
 
 
 with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
-    _data_sql= f.read().decode('utf8')
+    _data_sql = f.read().decode('utf8')
+
 
 @pytest.fixture
 def app():
     db_fd, db_path = tempfile.mkstemp()
 
-    app.create_app({
+    app = create_app({
         'TESTING': True,
         'DATABASE': db_path
     })
@@ -36,3 +38,4 @@ def client(app):
 @pytest.fixture
 def runner(app):
     return app.test_cli_runner()
+
