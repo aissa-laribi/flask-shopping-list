@@ -29,7 +29,7 @@ def app():
     os.unlink(db_path)
 
 
-#Instead of running the server to make requests, 
+# Instead of running the server to make requests, use the client.
 @pytest.fixture
 def client(app):
     return app.test_client()
@@ -38,4 +38,3 @@ def client(app):
 @pytest.fixture
 def runner(app):
     return app.test_cli_runner()
-
