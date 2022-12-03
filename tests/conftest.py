@@ -1,10 +1,9 @@
 import os
 import tempfile
-import pytest
 
+import pytest
 from shopping_list import create_app
 from shopping_list.db import get_db, init_db
-
 
 with open(os.path.join(os.path.dirname(__file__), 'data.sql'), 'rb') as f:
     _data_sql = f.read().decode('utf8')
@@ -16,7 +15,7 @@ def app():
 
     app = create_app({
         'TESTING': True,
-        'DATABASE': db_path
+        'DATABASE': db_path,
     })
 
     with app.app_context():
@@ -29,7 +28,6 @@ def app():
     os.unlink(db_path)
 
 
-# Instead of running the server to make requests, use the client.
 @pytest.fixture
 def client(app):
     return app.test_client()
@@ -38,3 +36,4 @@ def client(app):
 @pytest.fixture
 def runner(app):
     return app.test_cli_runner()
+
