@@ -36,3 +36,22 @@ def client(app):
 @pytest.fixture
 def runner(app):
     return app.test_cli_runner()
+
+
+class AuthActions(object):
+    def __init__(self, client):
+        self.client = client
+
+    def login(self, username='test', password='test'):
+        return self.client.post(
+            'auth/login',
+            data={'username': username, 'password': password}
+        )
+
+    def logout(self):
+        return self.client.get('auth/logout')
+
+
+@pytest.fixture
+def auth(client):
+    return AuthActions(client)
