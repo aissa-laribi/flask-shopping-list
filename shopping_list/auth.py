@@ -1,8 +1,6 @@
 from flask import (Blueprint, flash, request, redirect,
                    render_template, url_for)
-
-
-from shopping_list.db import get_db
+from .db import get_db
 from werkzeug.security import generate_password_hash
 
 bp = Blueprint('auth', __name__, url_prefix='/auth')
@@ -38,6 +36,6 @@ def register():
     return render_template('auth/register.html')
 
 
-@bp.route('/login', request.methods == ('GET', 'POST'))
+@bp.route('/login', methods=('GET', 'POST'))
 def login():
     pass
