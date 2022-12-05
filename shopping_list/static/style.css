@@ -1,5 +1,5 @@
 html { font-family: sans-serif; background: linear-gradient(211deg, rgba(55,123,168,0.7105041845839899) 0%, rgba(211,211,211,1) 100%, rgba(255,255,255,1) 100%); padding: 10rem; }
-body { max-width: 600px; height: auto; margin: 0 auto; margin-top: 80px ;background: white; border-radius: 20px; }
+body { max-width: 600px; height: auto; margin: 0 auto; margin-top: 10px ;background: white; border-radius: 20px; }
 h1 { font-family: serif; color: #377ba8; margin: 1rem 0; }
 a { color: #377ba8; }
 hr { border: none; border-top: 1px solid #d3d3d3; }

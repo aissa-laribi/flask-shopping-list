@@ -1,0 +1,19 @@
+{% extends 'base.html' %}
+{% block header%}
+    <h1 align="center">Shopping List</h1>
+{% endblock %}
+{% block content %}
+<form class="add" method="post" >
+    <input type="text" id="item" name="item" placeholder="Enter your item" align="center" required>
+    <input type="submit" value="Add" align="center" id="add-button" name="add-button">
+</form>
+<section>
+    <h3 align="center">Items<br></h3>
+    <ul>{% for row in rows %}
+        <li>
+        {{ row[1] }}
+        </li>
+        {% endfor %}
+    </ul>
+</section>
+{% endblock %}
