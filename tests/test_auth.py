@@ -29,7 +29,7 @@ def test_register(client, app):
 def test_login(auth, client):
     assert client.get('auth/login').status_code == 200
     response = auth.login()
-    assert response.headers["Location"] == "/hello"
+    assert response.headers["Location"] == '/items'
 
     with client:
         client.get('/')
@@ -43,3 +43,25 @@ def test_login(auth, client):
     def test_login_validate_input(auth, username, password, message):
         response = auth.login(username, password)
         assert message in response.data
+
+
+def test_load_logged_in_user(client):
+    with client:
+        client.post('auth/login',
+                    data={'username': 'test', 'password': 'test'})
+        client.get('/')
+        user_id = session.get('user_id')
+        assert user_id == 1
+        assert g.user['username'] == 'test'
+
+
+def test_logout(client, auth):
+    test_load_logged_in_user(client)
+    response = auth.logout()
+    assert response.headers["Location"] == '/auth/login'
+
+
+def test_login_required(client):
+    with client:
+        response = client.get('/items')
+        assert response.headers["Location"] == '/auth/login'

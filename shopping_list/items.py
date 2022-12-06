@@ -1,5 +1,5 @@
 from flask import (
-    Blueprint, flash, redirect, request, render_template, request, url_for
+    Blueprint, flash, render_template, request
 )
 from .auth import login_required, load_logged_in_user
 from .db import get_db
@@ -26,3 +26,16 @@ def create_item():
         flash(error)
         
     return render_template('items.html')
+
+
+@bp.route('/items', methods=['GET'])
+@login_required
+def get_items():
+    load_logged_in_user()
+    db = get_db()
+    cursor = db.cursor()
+    items = cursor.execute("SELECT * FROM item")
+    rows = items.fetchall()
+    for row in rows:
+        print(row[0])
+    return render_template('items.html', rows=rows)
