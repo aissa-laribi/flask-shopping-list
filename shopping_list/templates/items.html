@@ -3,17 +3,20 @@
     <h1 align="center">Shopping List</h1>
 {% endblock %}
 {% block content %}
-<form class="add" method="post" >
-    <input type="text" id="item" name="item" placeholder="Enter your item" align="center" required>
+<form class="add" method="post">
+    <input type="text" id="add-item" name="add-item" placeholder="Enter your item" align="center" required>
     <input type="submit" value="Add" align="center" id="add-button" name="add-button">
 </form>
 <section>
-    <h3 align="center">Items<br></h3>
-    <ul>{% for row in rows %}
-        <li>
-        {{ row[1] }}
-        </li>
-        {% endfor %}
-    </ul>
+<table>
+    <tr><th>Items</tr></th></tr>
+    {% for row in rows %}
+  <tr><td><p id="item-label" name="item-label">{{ row[2] }}<form class="del" method="post">
+    <input type="text" value="{{ row[2] }}" id="del-item" name="del-item" placeholder="Enter your item" align="center" required>
+    <input type="submit" value="Delete" align="center" id="del-button" name="del-button" ></p>
+</form>
+    {% endfor %} 
+</td></tr>
+</table>
 </section>
 {% endblock %}

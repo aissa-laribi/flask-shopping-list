@@ -9,5 +9,7 @@ CREATE TABLE user(
 
 CREATE TABLE item(
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    label TEXT NOT NULL
+    user_id INTEGER NOT NULL,
+    label TEXT NOT NULL,
+    FOREIGN KEY (user_id) REFERENCES user (id)
 );
