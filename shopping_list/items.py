@@ -35,7 +35,7 @@ def create_delete_item():
             error = 'Nothing to delete'
         if error is None:
             try:
-                db.execute("DELETE FROM item WHERE label = (?) AND user_id = (?) ",(item, g.user['id'],))
+                db.execute("DELETE FROM item WHERE label =(?) AND user_id =(?)",(item, g.user['id'],))
                 db.commit()
                 load_logged_in_user()
                 return redirect(url_for('.get_items'))

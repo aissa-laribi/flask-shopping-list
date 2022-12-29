@@ -1,24 +1,46 @@
-<!doctype html>
-<title>{% block title %}{% endblock %} - Shopping List</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-<nav>
-  <h1>Shopping List</h1>
-  <ul>
-    {% if g.user %}
-      <li><span>{{ g.user['username'] }}</span>
-      <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
-    {% else %}
-      <li><a href="{{ url_for('auth.register') }}">Register</a>
-      <li><a href="{{ url_for('auth.login') }}">Log In</a>
-    {% endif %}
-  </ul>
-</nav>
-<section class="content">
-  <header>
-    {% block header %}{% endblock %}
-  </header>
-  {% for message in get_flashed_messages() %}
-    <div class="flash">{{ message }}</div>
-  {% endfor %}
-  {% block content %}{% endblock %}
-</section>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}{% endblock %} - Shopping List</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  </head>
+  <body>
+    <header>
+    <nav class="menu">
+      <img src="../static/img/shopping-cart.png">
+      <ul>
+        {% if g.user %}
+          <li><span>{{ g.user['username'] }}</span>
+          <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
+        {% else %}
+          <li><a href="{{ url_for('auth.register') }}">Register</a>
+          <li><a href="{{ url_for('auth.login') }}">Log In</a>
+        {% endif %}
+      </ul>
+    </nav>
+    </header>
+    <main>
+    <section class="content">
+      <header>
+        {% block header %}{% endblock %}
+      </header>
+        {% for message in get_flashed_messages() %}
+      <div class="flash">{{ message }}</div>
+        {% endfor %}
+        {% block content %}{% endblock %}
+    </section>
+  </main>
+  <footer>
+    <nav class="copyright">
+    <p>Copyright 2022</p>
+    </nav>
+    <nav class="built-with">
+      <p>Developped and deployed with</p>
+        <a title="Flask is a popular, extensible web microframework for building web applications with Python." href="https://flask.palletsprojects.com/en/2.2.x/">
+        <img width="128" alt="Flask logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/3/3c/Flask_logo.svg/256px-Flask_logo.svg.png"></a>
+        <a title="Docker helps developers build lightweight and portable software containers that simplify application development, testing, and deployment." href="https://www.docker.com/">
+        <img width="128" alt="Docker (container engine) logo" src="https://upload.wikimedia.org/wikipedia/commons/thumb/4/4e/Docker_%28container_engine%29_logo.svg/256px-Docker_%28container_engine%29_logo.svg.png"></a>
+    </nav>
+  </footer>
+  </body>
+</html>
